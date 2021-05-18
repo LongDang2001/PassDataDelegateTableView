@@ -9,21 +9,12 @@
 import UIKit
 
 class FourViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, passDataDelegateFire {
-   
-    
-    // có mấy dòng code phía dưới mà tìm mãi mới thấy được cách làm
-    // ham pass data ve cua delegate
-    // cái hàm dưới này là hàm để thêm cái dữ liệu của delegate
+    var indexPatcha: IndexPath?
     
     func passDataFire(data: String) {
-        if let indexFire = tableView.indexPathForSelectedRow {
-            self.arrayName[indexFire.row] = data
-            tableView.reloadRows(at: [indexFire], with: .none)
-            
-        } else {
-            arrayName.insert(data, at: 0 )
-            tableView.reloadData()
-        }
+        // arrayName.insert(data, at: arrayName.count)
+        arrayName.append(data)
+        tableView.reloadData()
     }
     
 
@@ -32,17 +23,25 @@ class FourViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        tableView.backgroundColor = UIColor.yellow
         tableView.dataSource = self
         tableView.delegate = self
 
         
+    }
+    
+    func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
+        print("sselecrow at")
+        return indexPath
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return arrayName.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        indexPatcha = indexPath
         let cell = tableView.dequeueReusableCell(withIdentifier: "IDCell", for: indexPath)
+        
         cell.textLabel?.text = arrayName[indexPath.row]
         return cell
     }
@@ -52,7 +51,7 @@ class FourViewController: UIViewController, UITableViewDataSource, UITableViewDe
             passDataToFire?.dataFire = arrayName[indexFire.row]
             
         }
-        passDataToFire?.delegateFire = self
+        passDataToFire?.delegateFire = self // cau lenh nay co tac dung gi
         
         tableView.reloadData()
     }

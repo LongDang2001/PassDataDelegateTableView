@@ -7,6 +7,7 @@
 //
 
 import UIKit
+
 protocol passDataDelegateFire {
     func passDataFire(data: String)
 }
@@ -14,7 +15,7 @@ protocol passDataDelegateFire {
 class FireViewController: UIViewController {
 
     @IBOutlet weak var textFieldFire: UITextField!
-    var dataFire: String?
+    var dataFire: String?  // check xem du lieu nhap vao co dung khong
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,12 +28,9 @@ class FireViewController: UIViewController {
     @IBAction func backToFire() {
         
         delegateFire?.passDataFire(data: textFieldFire.text!)
-        print("Truyen gia tri: \(textFieldFire.text)  vao protocal func data")
+        print("Truyen gia tri: \(textFieldFire.text) ")
         
         dismiss(animated: true, completion: nil)
     }
     
-
-    
-
 }
