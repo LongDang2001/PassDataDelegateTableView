@@ -23,10 +23,12 @@ class FireViewController: UIViewController {
         }
     }
     
-    var delegateFire: passDataDelegateFire?
+    var delegateFire: passDataDelegateFire?  // khai bao mot delegate
     @IBAction func backToFire() {
         
-        self.delegateFire?.passDataFire(data: textFieldFire.text!)
+        delegateFire?.passDataFire(data: textFieldFire.text!)
+        print("Truyen gia tri: \(textFieldFire.text)  vao protocal func data")
+        
         dismiss(animated: true, completion: nil)
     }
     
